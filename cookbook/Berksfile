@@ -1,0 +1,4 @@
+site :opscode
+
+metadata
+cookbook "semitas", git: "https://github.com/cbednarski/semitas.git", rel: "cookbook"
