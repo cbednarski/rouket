@@ -14,3 +14,4 @@ bin/*
 .bundle/*
 
 vendor/
+rouket-chef.json

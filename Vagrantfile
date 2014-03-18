@@ -13,14 +13,7 @@ Vagrant.configure('2') do |config|
   config.berkshelf.berksfile_path = 'cookbook/Berksfile'
 
   config.vm.provision :chef_solo do |chef|
-    chef.json = {
-      'nginx' => {
-        'source' => {
-          'version' => '1.4.4'
-        },
-        'version' => '1.4.4'
-      }
-    }
+    chef.json = JSON.parse(open('rouket-chef.json').read)
 
     chef.run_list = [
         "recipe[rouket::default]"
