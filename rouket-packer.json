@@ -24,6 +24,6 @@
   "provisioners": [{
     "type": "chef-solo",
     "cookbook_paths": ["{{pwd}}/vendor/cookbooks"],
-    "run_list": ["airbase::default"]
+    "run_list": ["rouket::default"]
   }]
 }
