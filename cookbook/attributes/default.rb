@@ -5,3 +5,8 @@ default['rouket']['origin_backend'] = 'https://s3.amazonaws.com:443'
 
 # In s3, this is your bucket name.
 default['rouket']['origin_path'] = 'rouket-test'
+
+override['nginx']['install_method'] = 'source'
+override['nginx']['version'] = '1.4.7'
+
+include_attribute "nginx::source"
