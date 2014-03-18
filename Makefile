@@ -6,5 +6,5 @@ vagrant: init
 	vagrant up
 	vagrant provision
 init:
-	bundle install
-	bundle exec berks install --path vendor/cookbooks
+	cd cookbook && bundle install
+	cd cookbook && bundle exec berks install --path ../vendor/cookbooks
