@@ -24,7 +24,6 @@
 
   "provisioners": [{
     "type": "chef-solo",
-    "json_path": "rouket-chef.json",
     "json": {
       "rouket": {
         "origin_path":"{{user `origin_path`}}"
