@@ -2,6 +2,7 @@
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "origin_path": null,
     "version": null
   },
 
@@ -23,6 +24,12 @@
 
   "provisioners": [{
     "type": "chef-solo",
+    "json_path": "rouket-chef.json",
+    "json": {
+      "rouket": {
+        "origin_path":"{{user `origin_path`}}"
+      }
+    },
     "cookbook_paths": ["{{pwd}}/vendor/cookbooks"],
     "run_list": ["rouket::default"]
   }]

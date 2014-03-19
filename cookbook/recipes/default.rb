@@ -7,6 +7,13 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'apt'
+
+bash 'apt-upgrade' do
+    user 'root'
+    code 'apt-get upgrade -y'
+end
+
 include_recipe 'nginx'
 
 link "/usr/bin/nginx" do
