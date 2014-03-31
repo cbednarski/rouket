@@ -8,6 +8,7 @@ server {
     resolver 8.8.8.8;
 
     server_name_in_redirect on;
+    server_tokens off;
 
     error_page 403 /403.html;
     error_page 404 /404.html;
@@ -19,6 +20,10 @@ server {
     location / {
         proxy_redirect off;
         proxy_intercept_errors off;
+
+        proxy_hide_header x-amz-id-2;
+        proxy_hide_header x-amz-request-id;
+        proxy_hide_header x-amz-meta-s3cmd-attrs;
 
         # Add a trailing slash if there's no file extension
         rewrite ^((.+)/\w+(?!\.\w+))$ http://$host$1/ permanent;

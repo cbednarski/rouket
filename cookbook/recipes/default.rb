@@ -17,7 +17,7 @@ end
 include_recipe 'nginx'
 
 link "/usr/bin/nginx" do
-  to "/opt/nginx-1.4.4/sbin/nginx"
+  to "/opt/#{node['nginx']['version']}/sbin/nginx"
 end
 
 template "/etc/nginx/sites-enabled/rouket" do
@@ -29,4 +29,8 @@ template "/etc/nginx/sites-enabled/rouket" do
       :origin_backend => node['rouket']['origin_backend'],
       :origin_path => node['rouket']['origin_path']
     })
+end
+
+service 'nginx' do
+  action :reload
 end
