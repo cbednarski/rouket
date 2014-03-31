@@ -1,10 +1,10 @@
 log_format upstreamlog '[$time_local] $remote_addr $request proxied to $upstream_addr: $upstream_http_uri upstream_response_time $upstream_response_time msec $msec request_time $request_time';
 
-access_log  /var/log/nginx/proxy.log upstreamlog;
+# uncomment for debugging
+# access_log  /var/log/nginx/proxy.log upstreamlog;
 
 server {
     listen 80 default_server;
-    # server_name ~^(?<domain>.+)$;
     resolver 8.8.8.8;
 
     server_name_in_redirect on;
@@ -16,16 +16,12 @@ server {
     error_page 503 /503.html;
     error_page 504 /504.html;
 
-    # add this so we can do:
-    # try_files @proxy $uri etc
-    #location @proxy {
-    #    blah
-    #}
-
     location / {
         proxy_redirect off;
         proxy_intercept_errors off;
 
+        # Add a trailing slash if there's no file extension
+        rewrite ^((.+)/\w+(?!\.\w+))$ http://$host$1/ permanent;
         rewrite ^(.*)/$ $1/index.html;
         rewrite ^(.*)$ /<%= @origin_path %>/$host$1 break;
 
